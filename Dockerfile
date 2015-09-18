@@ -1,6 +1,9 @@
 FROM logstash:latest
 MAINTAINER StackEngine
 
-COPY ./config /etc/logstash/conf.d
+COPY ./config/logstash.conf /etc/logstash/conf.d/logstash.conf
 
-CMD ["logstash -f /etc/logstash/conf.d/logstash.conf']
+COPY entrypoint.sh /tmp/entrypoint.sh
+RUN chmod +x /tmp/entrypoint.sh
+
+CMD ["/tmp/entrypoint.sh"]
